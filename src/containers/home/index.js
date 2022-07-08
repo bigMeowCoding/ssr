@@ -15,6 +15,16 @@ const Home = () => {
       .catch(function (error) {
         console.log(error);
       });
+      request
+          .post("/api3/test", {
+              data: {},
+          })
+          .then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
   }, []);
   return (
     <div>

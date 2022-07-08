@@ -1,3 +1,5 @@
+import {mockMiddleWare} from "./middleware/mock";
+
 const express = require("express");
 const { renderToString } = require("react-dom/server");
 import Home from "./containers/home";
@@ -6,12 +8,14 @@ import proxy from "express-http-proxy";
 const app = express();
 app.use(express.static("public"));
 const content = renderToString(<Home />);
+app.use(mockMiddleWare);
+
 app.use(
   "/api3",
   proxy("http://localhost:8888", {
     proxyReqPathResolver: function (req) {
-        console.log('req====url',req.url)
-      return req.url
+      console.log("req====url", req.url);
+      return req.url;
     },
   })
 );
